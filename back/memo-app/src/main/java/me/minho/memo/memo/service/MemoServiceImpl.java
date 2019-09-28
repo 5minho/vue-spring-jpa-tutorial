@@ -1,8 +1,8 @@
 package me.minho.memo.memo.service;
 
 import lombok.RequiredArgsConstructor;
-import me.minho.memo.memo.controller.dto.MemoDto;
 import me.minho.memo.memo.domain.Memo;
+import me.minho.memo.memo.dto.MemoDto;
 import me.minho.memo.memo.repository.MemoRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -22,8 +22,8 @@ public class MemoServiceImpl implements MemoService {
     private final MemoRepository memoRepository;
 
     @Override
-    public void save(MemoDto.SaveReq memoSaveDto) {
-        memoRepository.save(memoSaveDto.toEntity());
+    public Memo save(MemoDto.SaveReq memoSaveDto) {
+        return memoRepository.save(memoSaveDto.toEntity());
     }
 
     @Override

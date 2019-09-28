@@ -1,7 +1,7 @@
 package me.minho.memo.memo.service;
 
-import me.minho.memo.memo.controller.dto.MemoDto;
 import me.minho.memo.memo.domain.Memo;
+import me.minho.memo.memo.dto.MemoDto;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import java.util.List;
  * Created by minho on 25/09/2019.
  */
 public interface MemoService {
-    void save(MemoDto.SaveReq memoSaveDto);
+    Memo save(MemoDto.SaveReq memoSaveDto);
     List<Memo> findAll();
 }

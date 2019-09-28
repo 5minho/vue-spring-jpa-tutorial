@@ -1,8 +1,6 @@
-package me.minho.memo.memo.controller.dto;
+package me.minho.memo.memo.dto;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.minho.memo.memo.domain.Memo;
 
 import java.util.List;
@@ -23,6 +21,21 @@ public class MemoDto {
     }
 
     @Getter
+    public static class SaveRes {
+        private Long id;
+        private String title;
+        private String content;
+
+        @Builder
+        public SaveRes(Long id, String title, String content) {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+        }
+    }
+
+    @Getter
+    @Setter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class SaveReq {
         private String title;
