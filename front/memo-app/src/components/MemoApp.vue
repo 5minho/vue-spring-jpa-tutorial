@@ -35,7 +35,7 @@
     // 초기화에 필요한 데이터를 created 훅에서 받아오자
     created() {
       memoAPICore.get('/')
-        .then(res=> {
+        .then(res => {
           this.memos = res.data.memos;
         })
     },
@@ -44,23 +44,22 @@
       addMemo(payload) {
         memoAPICore.post('/', payload)
           .then(res => { this.memos.push(res.data); } )
-        this.storeMemo();
-      },
-      storeMemo() {
-        const memosToString = JSON.stringify(this.memos);
-        localStorage.setItem('memos', memosToString);
       },
       deleteMemo(id) {
-        const targetIndex = this.memos.findIndex(v => v.id === id);
-        this.memos.splice(targetIndex, 1);
-        this.storeMemo();
+        memoAPICore.delete(`/${id}`)
+          .then( _ => {
+            const targetIndex = this.memos.findIndex(v => v.id === id);
+            this.memos.splice(targetIndex, 1)
+          })
       },
       updateMemo(payload) {
         const {id, content} = payload;
-        const targetIndex = this.memos.findIndex(v => v.id === id);
-        const targetMemo = this.memos[targetIndex];
-        this.memos.splice(targetIndex, 1, {...targetMemo, content});
-        this.storeMemo();
+        memoAPICore.put(`/${id}`, { content })
+          .then(() => {
+            const targetIndex = this.memos.findIndex(v => v.id === id);
+            const targetMemo = this.memos[targetIndex];
+            this.memos.splice(targetIndex, 1, {...targetMemo, content});
+          })
       }
     }
   }
