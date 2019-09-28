@@ -11,5 +11,7 @@ import java.util.List;
  */
 public interface MemoService {
     Memo save(MemoDto.SaveReq memoSaveDto);
+    void update(Long id, MemoDto.UpdateReq memoUpdateDto);
+    void deleteById(Long id);
     List<Memo> findAll();
 }

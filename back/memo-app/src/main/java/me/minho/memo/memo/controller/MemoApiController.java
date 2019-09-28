@@ -6,10 +6,7 @@ import me.minho.memo.memo.dto.MemoDto;
 import me.minho.memo.memo.service.MemoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * IDE : IntelliJ IDEA
@@ -36,5 +33,18 @@ public class MemoApiController {
                 .title(memo.getTitle())
                 .build(),
                 HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/api/memos/{memoId}")
+    public ResponseEntity deleteMemo(@PathVariable Long memoId) {
+        memoService.deleteById(memoId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/api/memos/{memoId}")
+    public ResponseEntity updateMemo(@PathVariable Long memoId,
+                                     @RequestBody MemoDto.UpdateReq updateReq) {
+        memoService.update(memoId, updateReq);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

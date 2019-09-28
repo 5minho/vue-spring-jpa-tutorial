@@ -27,6 +27,18 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
+    public void update(Long id, MemoDto.UpdateReq memoUpdateDto) {
+        Memo memo = memoRepository.findById(id).orElseThrow();
+        memo.update(memoUpdateDto.getContent());
+        memoRepository.save(memo);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        memoRepository.deleteById(id);
+    }
+
+    @Override
     public List<Memo> findAll() {
         return memoRepository.findAll();
     }

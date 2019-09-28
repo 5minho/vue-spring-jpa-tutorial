@@ -35,7 +35,6 @@ public class MemoDto {
     }
 
     @Getter
-    @Setter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class SaveReq {
         private String title;
@@ -47,5 +46,12 @@ public class MemoDto {
                     .content(content)
                     .build();
         }
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class UpdateReq {
+        private String content;
     }
 }
