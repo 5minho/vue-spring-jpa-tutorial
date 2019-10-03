@@ -11,5 +11,13 @@ spring:
     username: sa
     url: jdbc:h2:mem:memodb
 
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
 server:
   port: 8000
