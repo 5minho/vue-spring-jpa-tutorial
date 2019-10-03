@@ -25,18 +25,15 @@
     props: {
       memo: {
         type: Object
+      },
+      editingId: {
+        type: Number
       }
     },
-    data() {
-      return {
-        isEditing: false
+    computed: {
+      isEditing() {
+        return this.memo.id === this.editingId
       }
-    },
-    beforeUpdate() {
-      console.log("before update => ", this.$refs.content);
-    },
-    updated() {
-      console.log("updated => ", this.$refs.content);
     },
     methods: {
       deleteMemo() {
@@ -44,13 +41,13 @@
         this.$emit('deleteMemo', id);
       },
       editModeOn() {
-        this.isEditing = true;
+        this.$emit('setEditingId', this.memo.id)
         this.$nextTick(() => {
           this.$refs.content.focus();
         })
       },
       editModeOff() {
-        this.isEditing = false;
+        this.$emit('resetEditingId')
       },
       updateMemo(e) {
         const id = this.memo.id;
@@ -59,7 +56,7 @@
           return false
         }
         this.$emit('updateMemo', {id, content});
-        this.isEditing = false;
+        this.$refs.content.blur();
       }
     },
   }
